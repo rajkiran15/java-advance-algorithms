@@ -1,0 +1,61 @@
+import java.util.*;
+import java.util.HashMap;
+import java.util.Scanner;
+
+
+
+public class FirstProject{
+    static LinkedList<Edge> adj[];
+    static int V;
+	
+    FirstProject(int V){
+		this.V=V;
+		adj=new LinkedList[V];
+		for(int i=0;i<V;i++) {
+			adj[i]=new LinkedList<>();
+		}
+	}
+	
+	 static class Edge{
+    	 int src;
+    	 int dest;
+    	 int wt;
+    	 Edge(int src,int dest,int wt){
+    		 this.src=src;
+    		 this.dest=dest;
+    		 this.wt=wt;
+    	 }
+     }
+     
+     static void addEgde(int src,int dest,int wt) {
+    	 Edge edge=new Edge(src,dest,wt);
+         adj[src].add(edge);
+     }
+     
+     public void printGraph(){
+    	 for (int i = 0; i <V ; i++) {
+    	 LinkedList<Edge> list = adj[i];
+    	 for (int j = 0; j <list.size() ; j++) {
+    	    System.out.println("vertex-" + i + " is connected to " +
+    	    list.get(j).dest + " with weight " + list.get(j).wt);
+    	 }
+       }
+      }
+	
+   public static void main(String[] args)
+    {
+	   int vertices=6;
+	   FirstProject graph=new FirstProject(vertices);
+	   graph.addEgde(0, 1, 4);
+	   graph.addEgde(0, 2, 3);
+	   graph.addEgde(1, 3, 2);
+	   graph.addEgde(1, 2, 5);
+	   graph.addEgde(2, 3, 7);
+	   graph.addEgde(3, 4, 2);
+	   graph.addEgde(4, 0, 4);
+	   graph.addEgde(4, 1, 4);
+	   graph.addEgde(4, 5, 6);
+	   graph.printGraph();
+	   
+	}
+}

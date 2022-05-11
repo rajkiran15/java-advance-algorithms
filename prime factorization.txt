@@ -1,0 +1,12 @@
+           ArrayList<Integer> arr=new ArrayList<Integer>();
+	   int n=130;
+	   for(int i=2;i*i<=n;i++) {
+		   while(n % i == 0) {
+			   arr.add(i);
+			   n=n/i;
+		   }
+	   }
+	   if(n > 1) {
+		   arr.add(n);
+	   }
+	   System.out.println(arr);

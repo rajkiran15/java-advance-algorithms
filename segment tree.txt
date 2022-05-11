@@ -1,0 +1,48 @@
+import java.util.*;
+import java.util.HashMap;
+import java.util.Scanner;
+
+
+
+public class FirstProject{
+	static int segmentTree[];
+	FirstProject(int n,int arr[]){
+		int size=(int) Math.ceil(Math.log(n) / Math.log(2));
+		int max_size=2*(int) Math.pow(2, size) - 1;
+		segmentTree=new int[max_size];
+		constructSTUtil(arr, 0, n - 1, 0);
+	}
+	static int constructSTUtil(int arr[],int start,int end,int pos) {
+		if(start == end) {
+			segmentTree[pos]=arr[start];
+			return segmentTree[pos];
+		}
+		int mid=start+(end-start)/2;
+		int firstHalf=constructSTUtil(arr,start,mid,pos*2+1);
+		int secondHalf=constructSTUtil(arr,mid+1,end,pos*2+2);
+		return segmentTree[pos]=firstHalf+secondHalf;
+	}
+	static int getSumUtil(int ss,int se,int qs,int qe,int pos) {
+		 if(ss == qs && se == qe) {
+			 return segmentTree[pos];
+		 }
+		
+		int mid=ss+(se-ss)/2;
+		int firstHalf=getSumUtil(ss,mid,qs,qe,pos*2+1);
+		int secondHalf=getSumUtil(mid+1,se,qs,qe,pos*2+2);
+		return firstHalf + secondHalf;
+	}
+	static int getSum(int n,int qs,int qe) {
+		if(qs < 0 || qe > n-1 || qs > qe) {
+			System.out.println("Invalid Input");
+            return -1;
+		}
+		return getSumUtil(0, n - 1, qs, qe, 0);
+	}
+    public static void main(String[] args)
+     {
+        int arr[]= {1,3,5,7,9,11};
+        FirstProject tree=new FirstProject(arr.length,arr);
+        System.out.println("Sum of values in given range = " + tree.getSum(arr.length, 2, 2));
+     }
+}

@@ -1,0 +1,11 @@
+String str="javas is";
+(1)str.substring(0,3);//jav
+(2)str.replace('a','t');//jtvts is
+(3)str.toUpperCase()//JAVAS IS
+(4)str.length()//space is included (8)
+(5)char ch[]=str.toCharArray()
+(6)String str1="java";
+   String str2="java";
+   str1.equals(str2)//true
+(7)
+
